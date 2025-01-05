@@ -1,0 +1,49 @@
+name: backend
+
+env_file:
+  - path: ./.env
+    required: true 
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=ggamble
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      
+  
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  postgres_data:
+  redis_data:
