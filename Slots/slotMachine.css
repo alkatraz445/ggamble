@@ -1,0 +1,48 @@
+.slot-machine-container {
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f7f7f7;
+    display: inline-block;
+  }
+  
+  .slot-grid {
+    margin: 20px 0;
+  }
+  
+  .slot-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+  }
+  
+  .slot-item {
+    font-size: 1.5em;
+    margin: 0 10px;
+    padding: 5px;
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .draw-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .draw-button:hover {
+    background: #218838;
+  }
+  
+  .message {
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 10px;
+  }
+  
