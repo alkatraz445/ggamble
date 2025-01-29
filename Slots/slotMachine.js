@@ -19,7 +19,7 @@ const SlotMachine = () => {
 
   useEffect(() => {
     // Inicjalizacja WebSocket
-    const ws = new WebSocket('ws://twoj-server.com'); // tu adres serwera
+    const ws = new WebSocket('ws://ggamblereal.duckdns.org'); // tu adres serwera
     setSocket(ws);
 
     ws.onopen = () => {
