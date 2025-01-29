@@ -1,5 +1,5 @@
 import React from 'react';
-import SlotMachine from './SlotMachine';
+import SlotMachine from './slotMachine';
 import './app.css';
 
 const App = () => {
