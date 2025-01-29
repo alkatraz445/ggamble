@@ -52,27 +52,30 @@ const SlotMachine = () => {
       const slotMatrix = Array.from({ length: 3 }, () =>
         Array.from({ length: 3 }, () => Math.floor(Math.random() * 3) + 1)
       );
-
-      setMatrix(slotMatrix);
-
+      
+      const jackpot1 = Math.floor(Math.random() * 1000) + 1;
+      const jackpot2 = Math.floor(Math.random() * 1000) + 1;
+      
       let multiplier = 1;
       const middleRowSame = slotMatrix[1].every(num => num === slotMatrix[1][0]);
 
       if (middleRowSame) {
         multiplier += 1;
-        if (checkDiagonal(slotMatrix)) {
-          multiplier += 1;
+        if (checkDiagonal(slotMatrix)) multiplier += 1;
+        if (checkOtherRows(slotMatrix)) multiplier += 1;
+        
+        if (jackpot1 === jackpot2) {
+          multiplier += 1000;
         }
-        if (checkOtherRows(slotMatrix)) {
-          multiplier += 1;
-        }
+
         const winnings = bet * multiplier;
-        setBalance(prev => prev + winnings); // Dodanie wygranej
+        setBalance(prev => prev + winnings);
         setMessage(`Wygrana! Mnożnik: ${multiplier}, Wygrana: ${winnings}`);
         socket && socket.send(JSON.stringify({ type: 'update_balance', balance: balance + winnings }));
       } else {
         setMessage("Spróbuj ponownie.");
       }
+      setMatrix(slotMatrix);
       setIsRolling(false);
     });
   };
@@ -92,15 +95,13 @@ const SlotMachine = () => {
   };
 
   const checkDiagonal = (matrix) => {
-    const topLeftToBottomRight = matrix[0][0] === matrix[1][1] && matrix[1][1] === matrix[2][2];
-    const topRightToBottomLeft = matrix[0][2] === matrix[1][1] && matrix[1][1] === matrix[2][0];
-    return topLeftToBottomRight || topRightToBottomLeft;
+    return (matrix[0][0] === matrix[1][1] && matrix[1][1] === matrix[2][2]) ||
+           (matrix[0][2] === matrix[1][1] && matrix[1][1] === matrix[2][0]);
   };
 
   const checkOtherRows = (matrix) => {
-    const topRowSame = matrix[0].every(num => num === matrix[0][0]);
-    const bottomRowSame = matrix[2].every(num => num === matrix[2][0]);
-    return topRowSame || bottomRowSame;
+    return matrix[0].every(num => num === matrix[0][0]) ||
+           matrix[2].every(num => num === matrix[2][0]);
   };
 
   return (
