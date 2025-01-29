@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './SlotMachine.css';
+import './slotMachine.css';
 
 const EMOJI_MAP = {
   1: '🍎',
