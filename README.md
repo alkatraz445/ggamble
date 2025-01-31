@@ -76,7 +76,7 @@ Jeśli chcesz przyczynić się do rozwoju projektu:
 
 ## Licencja
 
-Projekt jest dostępny na licencji MIT. Szczegóły znajdują się w pliku `LICENSE`.
+Projekt jest dostępny na licencji APACHE 2.0. Szczegóły znajdują się w pliku `LICENSE`.
 
 ---
 
